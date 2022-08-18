@@ -6,7 +6,7 @@
 /*   By: equesnel <equesnel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 16:54:03 by equesnel          #+#    #+#             */
-/*   Updated: 2022/08/16 01:10:17 by equesnel         ###   ########.fr       */
+/*   Updated: 2022/08/18 02:03:31 by equesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	main(int ac, char **av)
 {
-	t_data all;
+	t_data	all;
 
-	if (check_errors(&all, ac, av) == -1)
+	if (check_errors(ac, av) == -1)
 		return (0);
 	init_vars(&all, ac, av);
-	create_philo(&all);
+	launch_thread(&all);
 	free_vars(&all);
 	return (0);
 }

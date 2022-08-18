@@ -6,7 +6,7 @@
 /*   By: equesnel <equesnel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 19:22:57 by equesnel          #+#    #+#             */
-/*   Updated: 2022/08/16 13:41:20 by equesnel         ###   ########.fr       */
+/*   Updated: 2022/08/18 17:03:38 by equesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,35 +26,38 @@ typedef struct  s_philo
 	pthread_mutex_t fork;
 	pthread_t       thread;
 	struct s_data	*all;
-	int				finish_eat;
 	int				nb;
+	int				min_eat;
 
 }               t_philo;
 
 typedef struct	s_data
 {
-	pthread_mutex_t lock;
+	struct timeval *has_eatting;
+	struct timeval start;
+
+	pthread_mutex_t lock_start;
+	pthread_mutex_t lock_has_eatting;
+	pthread_mutex_t lock_died;
+	
 	t_philo	*philo;
 	int	nb_max_philo;
-	int	to_die;
-	int	to_eat;
-	int	to_sleep;
-	int	min_eat;
-	int	i;
+	int	ttdie;
+	int	tteat;
+	int	ttsleep;
+	int	eat_enought;
+	int	dead;
 }				t_data;
 
-int		check_errors(t_data *all, int ac, char **av);
-
-void    init_vars(t_data *all, int ac, char **av);
-void	create_philo(t_data *all);
+int			check_errors(int ac, char **av);
+void   		init_vars(t_data *all, int ac, char **av);
+void		launch_thread(t_data *all);
+void		*dinner(void *arg);
+void		free_vars(t_data *all);
 
 /*utils*/
-
-int		ft_atoi(const char *nptr);
-void	ft_error(t_data *all);
-void	free_vars(t_data *all);
-
-// mettre un mutex pour le droit a l'ecriture sur le terminale
-// mutex pour checker si ils sont mort
+int			ft_atoi(const char *nptr);
+void		print_message(t_data *all, char *str, int nb);
+long int	time_diff(struct timeval *start, struct timeval *end);
 
 # endif
