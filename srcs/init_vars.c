@@ -6,7 +6,7 @@
 /*   By: equesnel <equesnel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 17:16:06 by equesnel          #+#    #+#             */
-/*   Updated: 2022/08/18 17:04:24 by equesnel         ###   ########.fr       */
+/*   Updated: 2022/08/18 18:48:19 by equesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,24 @@ static void	init_all(t_data *all, int ac, char **av)
 		all->eat_enought = ft_atoi(av[5]);
 	else
 		all->eat_enought = -1;
-	all->philo = malloc(sizeof(t_philo) * all->nb_max_philo);
-	all->has_eatting = malloc(sizeof(struct timeval) * all->nb_max_philo);
 	all->dead = 0;
+	all->philo = malloc(sizeof(t_philo) * all->nb_max_philo);
+	pthread_mutex_init(&all->lock_start, NULL);
+	pthread_mutex_lock(&all->lock_start);
 }
 
 static void	init_philo(t_data *all)
 {
 	int	i;
 
-	pthread_mutex_init(&all->lock_start, NULL);
-	pthread_mutex_init(&all->lock_died, NULL);
-	pthread_mutex_init(&all->lock_has_eatting, NULL);
-	pthread_mutex_lock(&all->lock_start);
 	i = 0;
-	while (i != all->nb_max_philo)
+	while(i != all->nb_max_philo)
 	{
 		all->philo[i].all = all;
-		all->philo[i].min_eat = 0;
 		all->philo[i].nb = i + 1;
+		all->philo[i].min_eat = 0;
 		pthread_mutex_init(&all->philo[i].fork, NULL);
-		pthread_create(&all->philo[i].thread, NULL, &dinner,
-			&all->philo[i]);
+		pthread_create(&all->philo[i].thread, NULL, &dinner, &all->philo[i]);
 		i++;
 	}
 }

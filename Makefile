@@ -9,7 +9,7 @@ SRC =   srcs/main.c \
 
 OBJ = $(SRC:.c=.o)
 CC = gcc -g
-CFLAGS = -Wall -Werror -Wextra -fsanitize=thread
+CFLAGS = -Wall -Werror -Wextra #-fsanitize=thread
 LIBS = -lpthread
 NAME = philo
 

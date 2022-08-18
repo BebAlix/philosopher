@@ -6,7 +6,7 @@
 /*   By: equesnel <equesnel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 19:22:57 by equesnel          #+#    #+#             */
-/*   Updated: 2022/08/18 17:03:38 by equesnel         ###   ########.fr       */
+/*   Updated: 2022/08/18 18:06:28 by equesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ typedef struct  s_philo
 {
 	pthread_mutex_t fork;
 	pthread_t       thread;
+
 	struct s_data	*all;
+	
 	int				nb;
 	int				min_eat;
 
@@ -33,14 +35,13 @@ typedef struct  s_philo
 
 typedef struct	s_data
 {
-	struct timeval *has_eatting;
+	//struct timeval *has_eatting;
 	struct timeval start;
 
 	pthread_mutex_t lock_start;
-	pthread_mutex_t lock_has_eatting;
-	pthread_mutex_t lock_died;
 	
 	t_philo	*philo;
+	
 	int	nb_max_philo;
 	int	ttdie;
 	int	tteat;
