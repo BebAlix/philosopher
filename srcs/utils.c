@@ -6,7 +6,7 @@
 /*   By: equesnel <equesnel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 17:25:48 by equesnel          #+#    #+#             */
-/*   Updated: 2022/08/18 00:39:10 by equesnel         ###   ########.fr       */
+/*   Updated: 2022/08/19 00:53:00 by equesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,4 @@ int	ft_atoi(const char *nptr)
 		i++;
 	}
 	return (result * c);
-}
-
-long int	time_diff(struct timeval *start, struct timeval *end)
-{
-	int	s;
-	int	ms;
-
-	s = (end->tv_sec - start->tv_sec) * 1000;
-	ms = (end->tv_usec - start->tv_usec) / 1000;
-	return (s + ms);
-}
-
-void	print_message(t_data *all, char *str, int nb)
-{
-	struct timeval	end;
-	long int		time;
-
-	gettimeofday(&end, NULL);
-	time = time_diff(&all->start, &end);
-	printf("%ld %d %s\n", time, nb, str);
 }

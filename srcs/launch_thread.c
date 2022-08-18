@@ -6,7 +6,7 @@
 /*   By: equesnel <equesnel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 21:28:03 by equesnel          #+#    #+#             */
-/*   Updated: 2022/08/18 18:37:11 by equesnel         ###   ########.fr       */
+/*   Updated: 2022/08/19 00:35:52 by equesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@
 
 void	launch_thread(t_data *all)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    gettimeofday(&all->start, NULL);
-    pthread_mutex_unlock(&all->lock_start);
-    while(i != all->nb_max_philo)
-    {
-        pthread_join(all->philo[i].thread, NULL);
-        i++;
-    }
+	i = 0;
+	gettimeofday(&all->start, NULL);
+	pthread_mutex_unlock(&all->lock_start);
+	while (i != all->nb_max_philo)
+	{
+		pthread_join(all->philo[i].thread, NULL);
+		i++;
+	}
 }

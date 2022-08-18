@@ -6,7 +6,7 @@
 /*   By: equesnel <equesnel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 17:16:06 by equesnel          #+#    #+#             */
-/*   Updated: 2022/08/18 18:48:19 by equesnel         ###   ########.fr       */
+/*   Updated: 2022/08/19 01:34:01 by equesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	init_all(t_data *all, int ac, char **av)
 	all->philo = malloc(sizeof(t_philo) * all->nb_max_philo);
 	pthread_mutex_init(&all->lock_start, NULL);
 	pthread_mutex_lock(&all->lock_start);
+	pthread_mutex_lock(&all->lock_write);
 }
 
 static void	init_philo(t_data *all)
@@ -33,7 +34,7 @@ static void	init_philo(t_data *all)
 	int	i;
 
 	i = 0;
-	while(i != all->nb_max_philo)
+	while (i != all->nb_max_philo)
 	{
 		all->philo[i].all = all;
 		all->philo[i].nb = i + 1;
