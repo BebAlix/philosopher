@@ -6,13 +6,13 @@
 /*   By: equesnel <equesnel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 00:10:21 by equesnel          #+#    #+#             */
-/*   Updated: 2022/08/18 02:01:13 by equesnel         ###   ########.fr       */
+/*   Updated: 2022/08/24 22:05:11 by equesnel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
 
-static int	check_digit(int ac, char **av)
+static void	check_digit(t_data *all, int ac, char **av)
 {
 	int	i;
 	int	x;
@@ -26,23 +26,38 @@ static int	check_digit(int ac, char **av)
 			if (av[i][x] < '0' || av[i][x] > '9')
 			{
 				write(2, "Wrong arguments\n", 17);
-				return (-1);
+				all->error = 1;
+				return ;
 			}
 			x++;
 		}
 		i++;
 	}
-	return (0);
+	i = 1;
 }
 
-int	check_errors(int ac, char **av)
+void	check_errors(t_data *all, int ac, char **av)
 {
+	int	i;
+
+	all->error = 0;
 	if (ac < 5 || ac > 6)
 	{
 		write(2, "Wrong number of arguments\n", 27);
-		return (-1);
+		all->error = 1;
+		return ;
 	}
-	if (check_digit(ac, av))
-		return (-1);
-	return (0);
+	check_digit(all, ac, av);
+	i = 1;
+	while (i != ac)
+	{
+		ft_atoi(av[i], all);
+		i++;
+	}
+	if (all->error == -1)
+	{
+		write(2, "int overflow !!!\n", 18);
+		return ;
+	}
+	return ;
 }
