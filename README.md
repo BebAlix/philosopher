@@ -2,7 +2,7 @@
 
 Program  who represente the dining philosophers problem with thread and mutex.
 
-## How to launch the game
+## How to launch the program
 
 1. To compile the program :
 
